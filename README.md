@@ -1,7 +1,7 @@
 # edge-detection
 Edge detection using Sobel operator 
 
-In the repository, there are included three .h files (check_file, sobel_kernel and sobel_operator) and one .c file (main). 
+In the repository, there are included three .h files (check_file, sobel_kernel and sobel_operator), one .c file (main) and resulting images of edge detection with different tresholds.
 
 In the sobel_kernel.h file we have defined two 3x3 matrices which represent the kernels of the Sobel operator used for edge detection.
 
