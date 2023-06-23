@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "sobel_edgedetection.h": "c",
+        "sobel_kernel.h": "c",
+        "check_file.h": "c",
+        "stdio.h": "c"
+    }
+}
