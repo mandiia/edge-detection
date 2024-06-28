@@ -2,6 +2,13 @@
 #include "sobel_kernel.h"
 
 void sobelEdgeDetection(unsigned char* input_image, unsigned char* output_image, int width, int height) {
+    float tr;
+    printf("Enter the desired treshold for edge detection: ");
+    scanf("%f", &tr);
+    while (tr < 0 || tr > 1) { 
+        printf("Treshold value is not valid. Value must be between 0 and 1. Please enter a new value: \n");
+        scanf("%f", &tr);
+    }
     for (int y = 1; y < height - 1; y++) {
         for (int x = 1; x < width - 1; x++) {
             int gx = 0, gy = 0;
@@ -22,8 +29,8 @@ void sobelEdgeDetection(unsigned char* input_image, unsigned char* output_image,
             //Normalize the gradient magnitude to 0 - 255 range
             magnitude = (magnitude > 255) ? 255 : magnitude;
            
-            //Apply an adaptive treshold based on local pixel intensity
-            int treshold = (int)round(0.998* magnitude); //Adjust the factor as desired
+            //Apply an adaptive threshold based on local pixel intensity
+            int treshold = (int)round(tr * magnitude); //Adjust the factor as desired
            
             // Threshold the gradient to create the edge-detected image
             output_image[y * width + x] = (magnitude > treshold) ? 255 : 0;

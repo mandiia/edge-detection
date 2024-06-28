@@ -2,10 +2,10 @@ CC=gcc
 ODIR = .
 LIBS = -lm
 
-DEPS = sobel_kernel.h check_file.h SOBEL_edgeDetection.h
+DEPS = sobel_kernel.h check_file.h conversion.h SOBEL_edgeDetection.h 
 
-make: SOBEL_edgeDetection.o check_file.o main.c
-	$(CC) -g check_file.o SOBEL_edgeDetection.o main.c -o app $(LIBS)
+make: SOBEL_edgeDetection.o check_file.o conversion.o main.c
+	$(CC) -g check_file.o SOBEL_edgeDetection.o conversion.o  main.c -o app $(LIBS)
 
 SOBEL_edgeDetection.o: SOBEL_edgeDetection.c SOBEL_edgeDetection.h sobel_kernel.h
 	$(CC) -c SOBEL_edgeDetection.c
@@ -13,14 +13,17 @@ SOBEL_edgeDetection.o: SOBEL_edgeDetection.c SOBEL_edgeDetection.h sobel_kernel.
 check_file.o: check_file.c check_file.h
 	$(CC) -c check_file.c
 
+conversion.o: conversion.c conversion.h
+	$(CC) -c conversion.c
+
 #make: main.c $(DEPS)
-#	$(CC) -g main.c sobel_kernel.c check_file.c SOBEL_edgeDetection.c -o main $(LIBS) 
+#	$(CC) -g main.c sobel_kernel.c check_file.c SOBEL_edgeDetection.c conversion.c -o main $(LIBS) 
 
 run:
 	./app
 
 check:
-	cppcheck --addon=misra.json --inline-suppr --suppressions-list=suppressions.txt main.c sobel_kernel.c check_file.c SOBEL_edgeDetection.c
+	cppcheck --addon=misra.json --inline-suppr --suppressions-list=suppressions.txt main.c sobel_kernel.c check_file.c SOBEL_edgeDetection.c conversion.c
 
 .PHONY:clean
 
